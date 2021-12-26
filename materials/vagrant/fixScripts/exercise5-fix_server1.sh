@@ -7,7 +7,6 @@ chown -R vagrant:vagrant /home/vagrant/.ssh
 sudo su vagrant -c "ssh-keygen -t rsa -P '' -f /home/vagrant/.ssh/id_rsa"
 mkdir -p /vagrant/nfs/ssh
 cp /home/vagrant/.ssh/id_rsa.pub /vagrant/nfs/ssh/server1.pub
-sudo su
 ssh-keyscan -t rsa server1 > /etc/ssh/ssh_known_hosts
 ssh-keyscan -t dsa server1 >> /etc/ssh/ssh_known_hosts
 sleep 20
