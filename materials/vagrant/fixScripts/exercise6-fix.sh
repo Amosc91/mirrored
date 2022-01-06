@@ -1,22 +1,18 @@
 #add fix to exercise6-fix here
 #bash.sh
-array=("$@")
-dest=${array[-1]}
-array_len=$((${#array[@]}-2))
+cp /vagrant/fixScripts/exercise6-fix.sh /home/vagrant/
+files=("$@")
+dest=${files[-1]}
+array_len=$((${#files[@]}-2))
 sum=0
-FILESIZE=0
-ssh server2 [[ -d ${dest} ]];
-if [ $? -eq 1 ]; then
-        ssh server2 mkdir -p ${dest};
-        echo ${dest} does not exist in remote. creating folder...;
-
-fi
+FileSize=0
+user="$USER"
 
 for i in $(seq 0 $array_len);
-        do
-        scp ${array[$i]} vagrant@server2:$dest;
-        FILESIZE=$(stat -c%s ${array[$i]});
-        sum=$(( $sum + $FILESIZE));
-done
+	do
+		scp ${files[$i]} $user@server2:$dest;
+		FileSize=$(stat -c%s ${files[$i]});
+		sum=$(($sum + $FileSize));
+	done
+echo $sum
 
-echo  $sum;
